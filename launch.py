@@ -1,6 +1,6 @@
 import os
-import sys
 import ssl
+import sys
 
 print('[System ARGV] ' + str(sys.argv))
 
@@ -15,12 +15,11 @@ if "GRADIO_SERVER_PORT" not in os.environ:
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
-
 import platform
 import fooocus_version
 
 from build_launcher import build_launcher
-from modules.launch_util import is_installed, run, python, run_pip, requirements_met
+from modules.launch_util import is_installed, run, python, run_pip, requirements_met, delete_folder_content
 from modules.model_loader import load_file_from_url
 
 REINSTALL_ALL = False
@@ -41,7 +40,7 @@ def prepare_environment():
 
     if TRY_INSTALL_XFORMERS:
         if REINSTALL_ALL or not is_installed("xformers"):
-            xformers_package = os.environ.get('XFORMERS_PACKAGE', 'xformers==0.0.20')
+            xformers_package = os.environ.get('XFORMERS_PACKAGE', 'xformers==0.0.23')
             if platform.system() == "Windows":
                 if platform.python_version().startswith("3.10"):
                     run_pip(f"install -U -I --no-deps {xformers_package}", "xformers", live=True)
@@ -63,8 +62,8 @@ def prepare_environment():
 vae_approx_filenames = [
     ('xlvaeapp.pth', 'https://huggingface.co/lllyasviel/misc/resolve/main/xlvaeapp.pth'),
     ('vaeapp_sd15.pth', 'https://huggingface.co/lllyasviel/misc/resolve/main/vaeapp_sd15.pt'),
-    ('xl-to-v1_interposer-v3.1.safetensors',
-     'https://huggingface.co/lllyasviel/misc/resolve/main/xl-to-v1_interposer-v3.1.safetensors')
+    ('xl-to-v1_interposer-v4.0.safetensors',
+     'https://huggingface.co/mashb1t/misc/resolve/main/xl-to-v1_interposer-v4.0.safetensors')
 ]
 
 
@@ -81,11 +80,26 @@ if args.gpu_device_id is not None:
     os.environ['CUDA_VISIBLE_DEVICES'] = str(args.gpu_device_id)
     print("Set device to:", args.gpu_device_id)
 
+if args.hf_mirror is not None : 
+    os.environ['HF_MIRROR'] = str(args.hf_mirror)
+    print("Set hf_mirror to:", args.hf_mirror)
+
 from modules import config
+from modules.hash_cache import init_cache
 os.environ["U2NET_HOME"] = config.path_inpaint
 
+os.environ['GRADIO_TEMP_DIR'] = config.temp_path
 
-def download_models(default_model, previous_default_models, checkpoint_downloads, embeddings_downloads, lora_downloads):
+if config.temp_path_cleanup_on_launch:
+    print(f'[Cleanup] Attempting to delete content of temp dir {config.temp_path}')
+    result = delete_folder_content(config.temp_path, '[Cleanup] ')
+    if result:
+        print("[Cleanup] Cleanup successful")
+    else:
+        print(f"[Cleanup] Failed to delete content of temp dir.")
+
+
+def download_models(default_model, previous_default_models, checkpoint_downloads, embeddings_downloads, lora_downloads, vae_downloads):
     for file_name, url in vae_approx_filenames:
         load_file_from_url(url=url, model_dir=config.path_vae_approx, file_name=file_name)
 
@@ -97,12 +111,12 @@ def download_models(default_model, previous_default_models, checkpoint_downloads
 
     if args.disable_preset_download:
         print('Skipped model download.')
-        return
+        return default_model, checkpoint_downloads
 
     if not args.always_download_new_model:
-        if not os.path.exists(os.path.join(config.path_checkpoints, default_model)):
+        if not os.path.exists(os.path.join(config.paths_checkpoints[0], default_model)):
             for alternative_model_name in previous_default_models:
-                if os.path.exists(os.path.join(config.path_checkpoints, alternative_model_name)):
+                if os.path.exists(os.path.join(config.paths_checkpoints[0], alternative_model_name)):
                     print(f'You do not have [{default_model}] but you have [{alternative_model_name}].')
                     print(f'Fooocus will use [{alternative_model_name}] to avoid downloading new models, '
                           f'but you are not using the latest models.')
@@ -112,17 +126,22 @@ def download_models(default_model, previous_default_models, checkpoint_downloads
                     break
 
     for file_name, url in checkpoint_downloads.items():
-        load_file_from_url(url=url, model_dir=config.path_checkpoints, file_name=file_name)
+        load_file_from_url(url=url, model_dir=config.paths_checkpoints[0], file_name=file_name)
     for file_name, url in embeddings_downloads.items():
         load_file_from_url(url=url, model_dir=config.path_embeddings, file_name=file_name)
     for file_name, url in lora_downloads.items():
-        load_file_from_url(url=url, model_dir=config.path_loras, file_name=file_name)
+        load_file_from_url(url=url, model_dir=config.paths_loras[0], file_name=file_name)
+    for file_name, url in vae_downloads.items():
+        load_file_from_url(url=url, model_dir=config.path_vae, file_name=file_name)
 
     return default_model, checkpoint_downloads
 
 
 config.default_base_model_name, config.checkpoint_downloads = download_models(
     config.default_base_model_name, config.previous_default_models, config.checkpoint_downloads,
-    config.embeddings_downloads, config.lora_downloads)
+    config.embeddings_downloads, config.lora_downloads, config.vae_downloads)
+
+config.update_files()
+init_cache(config.model_filenames, config.paths_checkpoints, config.lora_filenames, config.paths_loras)
 
 from webui import *

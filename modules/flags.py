@@ -127,6 +127,8 @@ class OutputFormat(Enum):
 
 
 class PerformanceLoRA(Enum):
+    HQ = None
+    MID_HQ = None
     QUALITY = None
     SPEED = None
     EXTREME_SPEED = 'sdxl_lcm_lora.safetensors'

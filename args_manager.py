@@ -1,7 +1,4 @@
 import ldm_patched.modules.args_parser as args_parser
-import os
-
-from tempfile import gettempdir
 
 args_parser.parser.add_argument("--share", action='store_true', help="Set whether to share on Gradio.")
 
@@ -31,8 +28,14 @@ args_parser.parser.add_argument("--disable-metadata", action='store_true',
 args_parser.parser.add_argument("--disable-preset-download", action='store_true',
                                 help="Disables downloading models for presets", default=False)
 
+args_parser.parser.add_argument("--enable-auto-describe-image", action='store_true',
+                                help="Enables automatic description of uov and enhance image when prompt is empty", default=False)
+
 args_parser.parser.add_argument("--always-download-new-model", action='store_true',
-                                help="Always download newer models ", default=False)
+                                help="Always download newer models", default=False)
+
+args_parser.parser.add_argument("--rebuild-hash-cache", help="Generates missing model and LoRA hashes.",
+                                type=int, nargs="?", metavar="CPU_NUM_THREADS", const=-1)
 
 args_parser.parser.set_defaults(
     disable_cuda_malloc=True,
@@ -51,8 +54,5 @@ if args_parser.args.disable_analytics:
 
 if args_parser.args.disable_in_browser:
     args_parser.args.in_browser = False
-
-if args_parser.args.temp_path is None:
-    args_parser.args.temp_path = os.path.join(gettempdir(), 'Fooocus')
 
 args = args_parser.args

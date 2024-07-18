@@ -10,6 +10,7 @@ __pycache__
 *.partial
 *.onnx
 sorted_styles.json
+hash_cache.txt
 /input
 /cache
 /language/default.json
@@ -18,7 +19,6 @@ config.txt
 config_modification_tutorial.txt
 user_path_config.txt
 user_path_config-deprecated.txt
-/models/safety_checker_models
 /modules/*.png
 /repositories
 /fooocus_env
@@ -52,3 +52,4 @@ user_path_config-deprecated.txt
 /package-lock.json
 /.coverage*
 /auth.json
+.DS_Store
