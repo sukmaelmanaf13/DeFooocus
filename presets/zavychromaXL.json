@@ -12,8 +12,8 @@
             0.2
         ],
         [
-            "None",
-            1.0
+            "FirstNSFW.safetensors",
+            0.2
         ],
         [
             "None",
@@ -44,6 +44,7 @@
     "embeddings_downloads": {},
     "lora_downloads": {
         "Hand-XL.safetensors": "https://civitai.com/api/download/models/471794?token=5dbd0e1f34338dca41553abe4ee25df3",
-        "HandFineTuning.safetensors": "https://civitai.com/api/download/models/358694?token=5dbd0e1f34338dca41553abe4ee25df3"
+        "HandFineTuning.safetensors": "https://civitai.com/api/download/models/358694?token=5dbd0e1f34338dca41553abe4ee25df3",
+        "FirstNSFW.safetensors": "https://civitai.com/api/download/models/278770?token=5dbd0e1f34338dca41553abe4ee25df3"
     },
 }
