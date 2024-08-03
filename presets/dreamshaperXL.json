@@ -4,12 +4,12 @@
     "default_refiner_switch": 0.5,
     "default_loras": [
         [
-            "None",
-            1.0
+            "Hand-XL.safetensors",
+            0.2
         ],
         [
-            "None",
-            1.0
+            "HandFineTuning.safetensors",
+            0.2
         ],
         [
             "None",
@@ -42,5 +42,9 @@
         "DreamShaperXL_Turbo_dpmppSdeKarras_half_pruned_6.safetensors": "https://huggingface.co/Lykon/dreamshaper-xl-turbo/resolve/main/DreamShaperXL_Turbo_dpmppSdeKarras_half_pruned_6.safetensors"
     },
     "embeddings_downloads": {},
-    "lora_downloads": {}
+    "lora_downloads": {
+        "Hand-XL.safetensors": "https://civitai.com/api/download/models/471794?token=5dbd0e1f34338dca41553abe4ee25df3",
+        "HandFineTuning.safetensors": "https://civitai.com/api/download/models/358694?token=5dbd0e1f34338dca41553abe4ee25df3",
+        "FirstNSFW.safetensors": "https://civitai.com/api/download/models/278770?token=5dbd0e1f34338dca41553abe4ee25df3"
+    },
 }
