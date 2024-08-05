@@ -36,6 +36,7 @@
     "default_overwrite_step": -1,
     "checkpoint_downloads": {
         "Juggernaut-XL_v9.safetensors": "https://huggingface.co/RunDiffusion/Juggernaut-XL-v9/resolve/main/Juggernaut-XL_v9_RunDiffusionPhoto_v2.safetensors",
+        "juggernautXL_v8Rundiffusion.safetensors": "https://huggingface.co/lllyasviel/fav_models/resolve/main/fav/juggernautXL_v8Rundiffusion.safetensors",
         "sd_xl_refiner_1.0_0.9vae.safetensors": "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0_0.9vae.safetensors"
     },
     "embeddings_downloads": {},
@@ -44,5 +45,12 @@
         "Hand-XL.safetensors": "https://huggingface.co/LengXuXu/Hand_XL/resolve/main/Perfect%20Hands%20v2.safetensors",
         "Hyper-SDXL-4steps-lora.safetensors": "https://huggingface.co/ByteDance/Hyper-SD/resolve/main/Hyper-SDXL-4steps-lora.safetensors"
     },
-    "previous_default_models": ["Juggernaut-XL_v9.safetensors"]
+    "previous_default_models": [
+        "Juggernaut-XL_v9.safetensors",
+        "juggernautXL_version8Rundiffusion.safetensors",
+        "juggernautXL_version7Rundiffusion.safetensors",
+        "juggernautXL_v7Rundiffusion.safetensors",
+        "juggernautXL_version6Rundiffusion.safetensors",
+        "juggernautXL_v6Rundiffusion.safetensors"
+    ]
 }
