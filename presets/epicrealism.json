@@ -1,0 +1,50 @@
+{
+    "default_model": "epicrealism.safetensors",
+    "default_refiner": "None",
+    "default_refiner_switch": 0.5,
+    "default_loras": [
+        [
+            "Hand-XL.safetensors",
+            0.2
+        ],
+        [
+            "HandFineTuning.safetensors",
+            0.2
+        ],
+        [
+            "FirstNSFW.safetensors",
+            0.2
+        ],
+        [
+            "None",
+            1.0
+        ],
+        [
+            "None",
+            1.0
+        ]
+    ],
+    "default_cfg_scale": 5.0,
+    "default_sample_sharpness": 3.0,
+    "default_sampler": "dpmpp_2m",
+    "default_scheduler": "karras",
+    "default_performance": "Speed",
+    "default_prompt": "",
+    "default_prompt_negative": "oily skin, plastic skin, B&W, label,text, watermark, signature, username, normal quality, jpeg artifacts, low quality, worst quality, cartoon, 3D, disfigured, anime, manga, unrealistic, saturated, high contrast, big nose, painting, drawing, sketch,render, CG, bad, art, deformed, fewer digits,extra limbs, extra legs, weird, blurry, cropped, duplicate, morbid, mutilated, out of frame, extra fingers, mutated hands, poorly drawn, hands, poorly drawn face, mutation, ugly, bad, anatomy, bad proportions, extra limbs, clone, clone-faced, cross proportions, missing arms, malformed limbs, missing legs, mutated, hands, fused fingers, too many fingers, photo shop, video game, ugly, tiling, cross-eye, mutation of eyes, long neck, bad hands, bad anatomy, bad arms, bad legs, deformed, poorly drawn hands, bad handas, poorly rendered hands, ugly fingers, extra fingers, too many fingers, missing fingers, long fingers, fused fingers,long hands, short fingers, missing arms, malformed hands, worst face, cloned face, bad face, poorly drawn face, ugly face, extra face, fused face, malformed face, verybadimagenegative_v1.3, ng_deepnegative_v1_75t, (ugly face:0.8),cross-eyed,sketches, (worst quality:2), (low quality:2), (normal quality:2), lowres, normal quality, ((monochrome)), ((grayscale)), skin spots, acnes, skin blemishes, bad anatomy, DeepNegative, facing away, tilted head, {Multiple people}, lowres, bad anatomy, bad hands, text, error, missing fingers, extra digit, fewer digits, cropped, worstquality, low quality, normal quality, jpegartifacts, signature, watermark, username, blurry, bad feet, cropped, poorly drawn hands, poorly drawn face, mutation, deformed, worst quality, low quality, normal quality, jpeg artifacts, signature, watermark, extra fingers, fewer digits, extra limbs, extra arms,extra legs, malformed limbs, fused fingers, too many fingers, long neck, cross-eyed,mutated hands, polar lowres, bad body, bad proportions, gross proportions, text, error, missing fingers, missing arms, missing legs, extra digit, extra arms, extra leg, extra foot, ((repeating hair))",
+    "default_styles": [
+        "Fooocus V2",
+        "Fooocus Enhance",
+        "Fooocus Sharp"
+    ],
+    "default_aspect_ratio": "1024*1024",
+    "default_overwrite_step": 20,
+    "checkpoint_downloads": {
+        "epicrealism.safetensors": "https://civitai.com/api/download/models/143906?token=5dbd0e1f34338dca41553abe4ee25df3"
+    },
+    "embeddings_downloads": {},
+    "lora_downloads": {
+        "Hand-XL.safetensors": "https://civitai.com/api/download/models/471794?token=5dbd0e1f34338dca41553abe4ee25df3",
+        "HandFineTuning.safetensors": "https://civitai.com/api/download/models/358694?token=5dbd0e1f34338dca41553abe4ee25df3",
+        "FirstNSFW.safetensors": "https://civitai.com/api/download/models/278770?token=5dbd0e1f34338dca41553abe4ee25df3"
+    }
+}
