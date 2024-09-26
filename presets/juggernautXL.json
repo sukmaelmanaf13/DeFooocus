@@ -1,5 +1,5 @@
 {
-    "default_model": "Juggernaut-XL_v9.safetensors",
+    "default_model": "JuggernautXL_Hyper.safetensors",
     "default_refiner": "None",
     "default_refiner_switch": 0.2,
     "default_loras": [
