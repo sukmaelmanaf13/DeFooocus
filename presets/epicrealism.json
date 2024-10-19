@@ -39,7 +39,7 @@
     "default_aspect_ratio": "1024*1024",
     "default_overwrite_step": 20,
     "checkpoint_downloads": {
-        "epicrealism.safetensors": "https://civitai.com/api/download/models/646523?token=5dbd0e1f34338dca41553abe4ee25df3"
+        "epicrealism.safetensors": "https://civitai.com/api/download/models/931522?token=5dbd0e1f34338dca41553abe4ee25df3"
     },
     "embeddings_downloads": {},
     "lora_downloads": {
